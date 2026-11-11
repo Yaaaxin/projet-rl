@@ -1,0 +1,59 @@
+{
+  "C_lai_robbins": 10.560624687607657,
+  "N": 100000,
+  "R": 200,
+  "ETC(10)": {
+    "regret_moyen_n1000": 61.93,
+    "regret_moyen": 2184.36,
+    "regret_ecart_type": 14149.819612480174,
+    "regret_median": 30.0,
+    "regret_max": 100000.0,
+    "part_runs_bloques": 0.025,
+    "regret_sur_log_n": 189.73109889803743
+  },
+  "eps_n-greedy (c=1)": {
+    "regret_moyen_n1000": 86.56,
+    "regret_moyen": 1821.275,
+    "regret_ecart_type": 12384.149899895854,
+    "regret_median": 39.5,
+    "regret_max": 100008.0,
+    "part_runs_bloques": 0.025,
+    "regret_sur_log_n": 158.193936505669
+  },
+  "UCB (sigma=1)": {
+    "regret_moyen_n1000": 34.57,
+    "regret_moyen": 103.55,
+    "regret_ecart_type": 863.8440369074169,
+    "regret_median": 32.0,
+    "regret_max": 12206.0,
+    "part_runs_bloques": 0.005,
+    "regret_sur_log_n": 8.994238720216345
+  },
+  "UCB (sigma=2)": {
+    "regret_moyen_n1000": 59.995,
+    "regret_moyen": 133.715,
+    "regret_ecart_type": 33.66333130235122,
+    "regret_median": 131.5,
+    "regret_max": 278.0,
+    "part_runs_bloques": 0.0,
+    "regret_sur_log_n": 11.614337329538664
+  },
+  "KL-UCB": {
+    "regret_moyen_n1000": 56.535,
+    "regret_moyen": 117.595,
+    "regret_ecart_type": 35.250303466386804,
+    "regret_median": 114.5,
+    "regret_max": 254.0,
+    "part_runs_bloques": 0.0,
+    "regret_sur_log_n": 10.21417191988258
+  },
+  "Thompson": {
+    "regret_moyen_n1000": 44.175,
+    "regret_moyen": 84.08,
+    "regret_ecart_type": 28.326410426282237,
+    "regret_median": 82.5,
+    "regret_max": 187.0,
+    "part_runs_bloques": 0.0,
+    "regret_sur_log_n": 7.303096007685083
+  }
+}
