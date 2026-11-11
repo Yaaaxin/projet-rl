@@ -1,0 +1,78 @@
+{
+  "test_evenement": {
+    "nb_fois_machine1_apres_exploration": 991,
+    "nb_tirages_apres_exploration": 991
+  },
+  "proba_evenement": {
+    "exact_111": 1.5036230532312666e-11,
+    "large": 7.563765139746516e-10
+  },
+  "ETC(3)": {
+    "frequence_machine_finale": [
+      0.01,
+      0.11,
+      0.88
+    ],
+    "recompense_moyenne": 3840.77,
+    "recompense_ecart_type": 370.35401723325225,
+    "recompense_min": 1944.0,
+    "recompense_max": 4088.0,
+    "part_machine3_fin": 0.88,
+    "regret_final": 140.89,
+    "nb_corrections": 26
+  },
+  "ETC(5)": {
+    "frequence_machine_finale": [
+      0.0,
+      0.07,
+      0.93
+    ],
+    "recompense_moyenne": 3916.6,
+    "recompense_ecart_type": 263.58154776697154,
+    "recompense_min": 2893.0,
+    "recompense_max": 4154.0,
+    "part_machine3_fin": 0.93,
+    "regret_final": 88.65,
+    "nb_corrections": 16
+  },
+  "ETC(10)": {
+    "frequence_machine_finale": [
+      0.0,
+      0.03,
+      0.97
+    ],
+    "recompense_moyenne": 3945.95,
+    "recompense_ecart_type": 184.8237148083426,
+    "recompense_min": 2926.0,
+    "recompense_max": 4112.0,
+    "part_machine3_fin": 0.97,
+    "regret_final": 61.28,
+    "nb_corrections": 8
+  },
+  "eps_n-greedy (c=1)": {
+    "frequence_machine_finale": [
+      0.0,
+      0.06,
+      0.94
+    ],
+    "recompense_moyenne": 3916.09,
+    "recompense_ecart_type": 236.80222728784634,
+    "recompense_min": 2965.0,
+    "recompense_max": 4135.0,
+    "part_machine3_fin": 0.9384,
+    "regret_final": 90.71
+  },
+  "eps_n-greedy (c=10)": {
+    "frequence_machine_finale": [
+      0.0,
+      0.01,
+      0.99
+    ],
+    "recompense_moyenne": 3861.18,
+    "recompense_ecart_type": 64.12430793924305,
+    "recompense_min": 3690.0,
+    "recompense_max": 4030.0,
+    "part_machine3_fin": 0.9812000000000001,
+    "regret_final": 138.35
+  }
+}
