@@ -1,0 +1,30 @@
+\section{Why the step size \texorpdfstring{$1/n$}{1/n} is so slow}
+\label{sec:steps}
+
+\subsection{A one-state calculation}
+
+Take a single state that loops on itself with a deterministic reward $r$. Its value is $v = r/(1-\gamma)$. TD(0) with step $\alpha_n$ gives $V_n = V_{n-1} + \alpha_n (r + \gamma V_{n-1} - V_{n-1})$, so the error $e_n = v - V_n$ satisfies
+\begin{equation}
+e_n = \big(1 - (1-\gamma)\,\alpha_n\big)\, e_{n-1}.
+\label{eq:onestate}
+\end{equation}
+With $\alpha_n = 1/n$ the product can be written with Gamma functions,
+\[
+\frac{e_n}{e_0} = \prod_{k=1}^{n} \frac{k - 1 + \gamma}{k} = \frac{\Gamma(n+\gamma)}{\Gamma(\gamma)\,\Gamma(n+1)} \sim \frac{n^{-(1-\gamma)}}{\Gamma(\gamma)} .
+\]
+For $\gamma = 0.8$ this is $n^{-0.2}$. After $10^5$ visits there is still $8.6\%$ of the initial error left. On the robot we start from $V = 0$ and $v(\text{high}) = 16.03$, which would leave an error around $1.4$. In report we measured $1.28$ with one seed, and the mean over 100 seeds (Section~\ref{sec:seeds}) is $1.33$. So the slowness we saw is not noise at all, it is the bias of the initialisation that the step $1/n$ forgets too slowly.
+
+The intuition is simple once it is written. With $\alpha_n = 1/n$, $V_n$ is just the average of all the targets since the beginning, and the first targets were computed with a wrong $V$. They are never forgotten, only diluted, and each new target is itself built on the biased $V$ (that is the factor $\gamma$). If $\gamma = 0$ the step $1/n$ would be perfect. The closer $\gamma$ is to one, the worse it gets.
+
+\subsection{What stochastic approximation predicts}
+
+With noise the picture is the classical one for stochastic approximation with steps $c/n$ \cite{kushner2003}. Let $\lambda$ be the smallest real part of an eigenvalue of the matrix of the mean dynamics. Then the error behaves like $n^{-c\lambda}$ when $c\lambda < 1/2$ (the bias wins) and like $n^{-1/2}$ when $c\lambda > 1/2$ (the noise wins, which is the best one can hope for). For TD(0) with per-state counts, a state visited a fraction $\pi_s$ of the time gets steps $c/(\pi_s t)$ but is updated only a fraction $\pi_s$ of the time, so the mean dynamics in global time $t$ is $\dot V = (c/t)(R + \gamma P V - V)$. The matrix is $c(I - \gamma P)$. For s/re the transition matrix has eigenvalues $1$ and $-0.7$, so the smallest eigenvalue of $I - \gamma P$ is $1 - \gamma$ and the prediction is
+\begin{equation}
+e_n \approx n^{-\min(c(1-\gamma),\, 1/2)} .
+\label{eq:rate}
+\end{equation}
+So $1/n$ (that is $c = 1$) is in the bad regime as soon as $\gamma > 1/2$, and $c$ has to be at least $1/(2(1-\gamma))$, half the effective horizon $H = 1/(1-\gamma)$, to get the $n^{-1/2}$ rate. This is the same message as the results of Szepesv\'ari \cite{szepesvari1997} and Even-Dar and Mansour \cite{evendar2003} for Q-learning: with $1/n$ the time needed is exponential in $H$, while with polynomial steps $1/n^\omega$, $\omega \in (1/2, 1)$, it is polynomial.
+
+For a polynomial step \eqref{eq:onestate} gives $e_n \approx e_0 \exp\!\big(-(1-\gamma)\, n^{1-\omega}/(1-\omega)\big)$, which kills the bias very fast, but the noise left is of order $\sqrt{\alpha_n} = n^{-\omega/2}$. So $\omega$ should not be too small either. We test these three predictions in the next subsections: the exponent in \eqref{eq:rate} as a function of $c$, how the cost grows with $H$, and which $\omega$ is best.
+
+We use $\alpha_n = c/(n + c - 1)$ instead of $c/n$ so that the first step is exactly one and $\alpha_n \le 1$ always. For $c = 1/(1-\gamma)$ the product in \eqref{eq:onestate} telescopes, $\prod_{k \le n} (k + c - 2)/(k + c - 1) = (c-1)/(n + c - 1)$, which is a nice sanity check for the code.

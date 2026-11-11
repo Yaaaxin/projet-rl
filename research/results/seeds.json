@@ -1,0 +1,290 @@
+{
+  "n_seeds": 100,
+  "claims": [
+    {
+      "id": "R1",
+      "claim": "robot TD: eta = 0.01 has the smallest error for s/w",
+      "true_on": 100,
+      "n": 100,
+      "ci95": [
+        0.9630051925239981,
+        0.9999999999999999
+      ]
+    },
+    {
+      "id": "R2",
+      "claim": "robot TD: eta = 0.01 has the smallest error for s/s",
+      "true_on": 63,
+      "n": 100,
+      "ci95": [
+        0.5322034757513312,
+        0.7181778743049083
+      ]
+    },
+    {
+      "id": "R3",
+      "claim": "robot TD: eta = 0.01 has the smallest error for s/re",
+      "true_on": 100,
+      "n": 100,
+      "ci95": [
+        0.9630051925239981,
+        0.9999999999999999
+      ]
+    },
+    {
+      "id": "R4",
+      "claim": "robot TD: with 1/n the error for s/re is still above 1",
+      "true_on": 100,
+      "n": 100,
+      "ci95": [
+        0.9630051925239981,
+        0.9999999999999999
+      ]
+    },
+    {
+      "id": "R5",
+      "claim": "robot TD: s/s is the hardest policy for every constant step",
+      "true_on": 100,
+      "n": 100,
+      "ci95": [
+        0.9630051925239981,
+        0.9999999999999999
+      ]
+    },
+    {
+      "id": "R6",
+      "claim": "robot MC: all true values inside the 95% intervals (as printed, 2 decimals)",
+      "true_on": 80,
+      "n": 100,
+      "ci95": [
+        0.7111690380734977,
+        0.8666340774409013
+      ]
+    },
+    {
+      "id": "R6s",
+      "claim": "robot MC: same, but strict (no rounding)",
+      "true_on": 0,
+      "n": 100,
+      "ci95": [
+        0.0,
+        0.03699480747600191
+      ]
+    },
+    {
+      "id": "R7",
+      "claim": "robot MC eps-greedy with the real return finds s/re",
+      "true_on": 100,
+      "n": 100,
+      "ci95": [
+        0.9630051925239981,
+        0.9999999999999999
+      ]
+    },
+    {
+      "id": "R8",
+      "claim": "robot MC eps-greedy with the immediate reward finds s/w",
+      "true_on": 100,
+      "n": 100,
+      "ci95": [
+        0.9630051925239981,
+        0.9999999999999999
+      ]
+    },
+    {
+      "id": "S1",
+      "claim": "student TD: alpha = 0.01 has the smallest error",
+      "true_on": 88,
+      "n": 100,
+      "ci95": [
+        0.8018773199709163,
+        0.9300066263473222
+      ]
+    },
+    {
+      "id": "S2",
+      "claim": "student TD: 1/n is worse than 0.01",
+      "true_on": 88,
+      "n": 100,
+      "ci95": [
+        0.8018773199709163,
+        0.9300066263473222
+      ]
+    },
+    {
+      "id": "S3",
+      "claim": "student Q-learning: the three alphas all end on W/W/W/R",
+      "true_on": 88,
+      "n": 100,
+      "ci95": [
+        0.8018773199709163,
+        0.9300066263473222
+      ]
+    },
+    {
+      "id": "S4",
+      "claim": "student Q-learning: alpha = 0.5 ends on W/W/W/R",
+      "true_on": 89,
+      "n": 100,
+      "ci95": [
+        0.8136853697209698,
+        0.9374586804477487
+      ]
+    },
+    {
+      "id": "S5",
+      "claim": "student Q-learning: alpha = 0.01 becomes stable after 2500 to 4500 episodes",
+      "true_on": 97,
+      "n": 100,
+      "ci95": [
+        0.915479219195973,
+        0.9897456617765851
+      ]
+    },
+    {
+      "id": "S6",
+      "claim": "student Q-learning: Q(2,R) with alpha = 0.01 is at least 3 below q*",
+      "true_on": 7,
+      "n": 100,
+      "ci95": [
+        0.034318824364064096,
+        0.13749671006529757
+      ]
+    }
+  ],
+  "report_seed_percentile": {
+    "robot s/w 0.5": 51.0,
+    "robot s/s 0.5": 36.0,
+    "robot s/re 0.5": 69.0,
+    "student TD 0.5": 67.0,
+    "robot s/w 0.1": 74.0,
+    "robot s/s 0.1": 96.0,
+    "robot s/re 0.1": 6.0,
+    "student TD 0.1": 61.0,
+    "robot s/w 0.01": 43.0,
+    "robot s/s 0.01": 4.0,
+    "robot s/re 0.01": 88.0,
+    "student TD 0.01": 53.0,
+    "robot s/w 1/n": 47.0,
+    "robot s/s 1/n": 25.0,
+    "robot s/re 1/n": 37.0,
+    "student TD 1/n": 85.0,
+    "student Q(2,R) alpha 0.01": 0.0,
+    "student stable episode alpha 0.01": 45.0
+  },
+  "comparisons": {
+    "robot s/w: 0.01 vs 0.1": {
+      "mean_x": 0.12771677870173173,
+      "mean_y": 0.38227240627666254,
+      "median_x": 0.11849939157200909,
+      "median_y": 0.3790275414385681,
+      "prob_improvement": 0.9998,
+      "agreement_with_100_seeds": {
+        "1": 0.9996,
+        "2": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0,
+        "20": 1.0
+      }
+    },
+    "robot s/s: 0.01 vs 1/n": {
+      "mean_x": 0.5544533369482683,
+      "mean_y": 0.7995477145849265,
+      "median_x": 0.5570523330938508,
+      "median_y": 0.7613593584412461,
+      "prob_improvement": 0.6343,
+      "agreement_with_100_seeds": {
+        "1": 0.6352,
+        "2": 0.7242,
+        "3": 0.7778,
+        "5": 0.8494,
+        "10": 0.9364,
+        "20": 0.9838
+      }
+    },
+    "robot s/re: 0.01 vs 0.1": {
+      "mean_x": 0.1067695528155725,
+      "mean_y": 0.36397550148031904,
+      "median_x": 0.10493435671171641,
+      "median_y": 0.3623839543574121,
+      "prob_improvement": 1.0,
+      "agreement_with_100_seeds": {
+        "1": 1.0,
+        "2": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0,
+        "20": 1.0
+      }
+    },
+    "student TD: 0.01 vs 1/n": {
+      "mean_x": 1.2663118545306242,
+      "mean_y": 3.1698087962644412,
+      "median_x": 1.2500887956723232,
+      "median_y": 3.243000039296245,
+      "prob_improvement": 0.8768,
+      "agreement_with_100_seeds": {
+        "1": 0.8836,
+        "2": 0.967,
+        "3": 0.987,
+        "5": 0.9988,
+        "10": 1.0,
+        "20": 1.0
+      }
+    },
+    "student Q: alpha 0.1 vs 0.5 (share of bad episodes)": {
+      "mean_x": 0.009243999999999997,
+      "mean_y": 0.11836400000000001,
+      "median_x": 0.007900000000000018,
+      "median_y": 0.1179,
+      "prob_improvement": 1.0,
+      "agreement_with_100_seeds": {
+        "1": 1.0,
+        "2": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0,
+        "20": 1.0
+      }
+    }
+  },
+  "shapes": {
+    "robot s/s, step 1/n (TD error)": {
+      "mean": 0.7995477145849265,
+      "median": 0.7613593584412461,
+      "iqm": 0.7537540222074856,
+      "sd": 0.5327589848659903,
+      "min": 0.01788013393187338,
+      "max": 2.4345960269102354,
+      "skew": 0.5769549080928932
+    },
+    "student, step 1/n (TD error)": {
+      "mean": 3.1698087962644412,
+      "median": 3.243000039296245,
+      "iqm": 3.1968153404942394,
+      "sd": 1.4926123755009906,
+      "min": 0.18676778625575288,
+      "max": 6.635175587362384,
+      "skew": 0.03607037291872816
+    },
+    "student Q, alpha 0.5 (share of good episodes, last 5000)": {
+      "mean": 0.881636,
+      "median": 0.8821,
+      "iqm": 0.882044,
+      "sd": 0.020957279875928075,
+      "min": 0.8288,
+      "max": 0.9324,
+      "skew": -0.04293704807800196
+    },
+    "student Q, alpha 0.01 (episode where policy becomes stable)": {
+      "mean": 3587.78,
+      "median": 3614.5,
+      "iqm": 3628.16,
+      "sd": 625.4946903665672,
+      "min": 190.0,
+      "max": 4524.0,
+      "skew": -2.9949349813895996
+    }
+  }
+}

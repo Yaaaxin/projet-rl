@@ -14,6 +14,7 @@ figures/             # all the plots made by the scripts
 resultats/           # the numbers (json) used in the report
 rapport/             # the report (LaTeX source + pdf)
 extensions/          # some extra experiments we did after the project (see below)
+research/            # a longer follow-up written like a small research note (English, with a pdf)
 ```
 
 ## How to run
@@ -42,3 +43,5 @@ After the project we tried to answer three questions that stayed open in the rep
 1. **Bandits** : UCB, KL-UCB and Thompson sampling on a longer horizon (n = 100 000), compared with the Lai-Robbins lower bound. KL-UCB ends very close to the theoretical constant (10.2 vs 10.56) and no run stays stuck, unlike ETC.
 2. **Why the step 1/n was so slow** : with gamma = 0.8 the initial error only decrease like n^(-0.2). Using 5/(n+4) or 1/n^0.8 instead divides the TD(0) error by about 100 on the robot.
 3. **30 seeds instead of 1** : most conclusions of the report hold, but Q-learning with alpha = 0.5 only ends on the optimal policy in 25 seeds out of 30.
+
+Later I went back to the same three questions more seriously and wrote it up as a short note, [**Loose ends of a small RL project**](research/paper/main.pdf). The summary is in [`research/`](research/README.md).

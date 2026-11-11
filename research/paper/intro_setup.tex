@@ -1,0 +1,24 @@
+\section{Introduction}
+
+This note started as a list of things we did not understand at the end of a course project. The project itself was small: three exercises from a master's course on reinforcement learning, each one a toy problem with a known answer. Exercise 2.4 is a three-armed bandit with Poisson rewards, exercise 3.1 is the ``green robot'' (a two-state MDP where a robot searches, waits or recharges its battery), and exercise 3.2 is the ``student dilemma'', a seven-state MDP where a student chooses between resting and working. We implemented explore-then-commit, $\varepsilon_n$-greedy, policy iteration, Monte Carlo, TD(0) and Q-learning on them and wrote a report.
+
+Three things in that report kept bothering us after.
+
+First, explore-then-commit sometimes got stuck on a bad arm and we only said that it is ``not sub-linear''. We never compared with algorithms that are supposed to be optimal, and we did not know how close one can actually get to the Lai--Robbins lower bound on such a small problem.
+
+Second, the step size $1/n$ in TD(0) was much slower than a constant step in all our runs. The theory we learned says $1/n$ satisfies the Robbins--Monro conditions and converges, so we just wrote ``too slow in practice'' and moved on. That is not really an explanation.
+
+Third, every number for exercises 3.1 and 3.2 came from a single random seed. We wrote this as a limitation in the conclusion, but we did not check if it mattered.
+
+So this note goes back to these three points. None of the results are new in the sense of the literature, and we cite where they come from. What we tried to do is to check them carefully on problems where we know the exact answer, and to see how far the theory goes in explaining what we actually saw. All code is in the same repository as the project and every figure can be regenerated with one command.
+
+\section{The three problems}
+\label{sec:setup}
+
+\paragraph{Poisson bandit.} Three arms with rewards $\mathcal P(2)$, $\mathcal P(3)$ and $\mathcal P(4)$, so the gaps are $\Delta = (2, 1, 0)$. The pseudo-regret after $n$ pulls is $R_n = \sum_k \Delta_k \mathbb E[N_n(k)]$, and we estimate it by averaging over independent runs. In Section~\ref{sec:bandits} we also use two-armed instances $(\mu - 1, \mu)$ for $\mu \in \{2, 4, 16, 64\}$, where the gap stays equal to one but the variance (which for a Poisson law is the mean) grows.
+
+\paragraph{Green robot.} Two states, \emph{high} and \emph{low}. In high the robot can search (reward 5, stays high with probability $0.3$) or wait (reward 1). In low it can search (reward 5, stays low with probability $0.6$, otherwise breaks down, gets $-10$ and is put back in high), wait (reward 1) or recharge (reward 0, goes to high). With $\gamma = 0.8$ the optimal policy is ``search when high, recharge when low'', written s/re, with $v^* = (16.03, 12.82)$. In Section~\ref{sec:steps} we only do policy evaluation of s/re, and we change $\gamma$.
+
+\paragraph{Student dilemma.} Seven states, three of them absorbing (rewards $-10$, $100$ and $-1000$ when you enter them), two actions. With $\gamma = 0.8$ the optimal policy is to work in states 1, 2, 3 and rest in state 4. The report evaluated a fixed policy called SWWS with TD(0) and then ran Q-learning with $\varepsilon = 0.1$ and $\alpha \in \{0.5, 0.1, 0.01\}$.
+
+For all TD and Q-learning runs we keep the protocol of the report: values start at zero, episodes start in a uniformly random state, robot episodes last 50 steps, and the step size of a state (or state--action pair) depends on its own visit count $n$.

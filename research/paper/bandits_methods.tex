@@ -1,0 +1,27 @@
+\section{Poisson bandits and the Lai--Robbins constant}
+\label{sec:bandits}
+
+\subsection{What the lower bound says here}
+
+For a bandit where every arm belongs to the same one-parameter family, Lai and Robbins \cite{lai1985} showed that any algorithm which is ``uniformly good'' (its regret is $o(n^a)$ for every $a > 0$ on every instance of the family) must satisfy
+\begin{equation}
+\liminf_{n\to\infty} \frac{R_n}{\log n} \;\ge\; C := \sum_{k:\,\Delta_k > 0} \frac{\Delta_k}{\mathrm{KL}(\mu_k, \mu^*)} ,
+\label{eq:lr}
+\end{equation}
+where for Poisson laws $\mathrm{KL}(p, q) = p \log(p/q) + q - p$. On the project instance $\mathrm{KL}(2, 4) \approx 0.614$ and $\mathrm{KL}(3, 4) \approx 0.137$, so $C = 2/0.614 + 1/0.137 \approx 3.26 + 7.30 = 10.56$. Most of the constant comes from arm 2, the one that is close to the best.
+
+Two things in \eqref{eq:lr} are easy to forget, and both matter below. The bound is only asymptotic, so at a finite $n$ an algorithm can sit under the line $C\log n$ without contradicting anything. And it only applies to uniformly good algorithms. An algorithm that is tuned for one instance can beat $C \log n$ on that instance, it just has to pay somewhere else.
+
+\subsection{Algorithms}
+
+We compare four index policies. All of them pull each arm once and then pull the arm with the largest index.
+
+\textbf{UCB with a fixed $\sigma$}: index $\hat\mu_k + \sqrt{2\sigma^2 \log t / N_k}$. This is the usual sub-Gaussian UCB. The catch is that a Poisson law with mean $\mu$ has variance $\mu$, so there is no single good $\sigma$. We use $\sigma = 1$, which is what one would write without thinking, and an ``oracle'' $\sigma = \sqrt{\mu^*}$, the standard deviation of the best arm (the largest of the instance).
+
+\textbf{KL-UCB} \cite{garivier2011, cappe2013}: index $\max\{q \ge \hat\mu_k : N_k \,\mathrm{KL}(\hat\mu_k, q) \le \log t\}$, computed by bisection. We drop the $\log\log t$ term, as most of implementations do.
+
+\textbf{Thompson sampling} \cite{korda2013}: with Jeffreys prior the posterior of arm $k$ is $\mathrm{Gamma}(1/2 + S_k,\, N_k)$ (shape, rate), where $S_k$ is the sum of its rewards. At each round we sample one value per arm and pull the largest.
+
+KL-UCB and Thompson sampling with this prior are both known to reach the constant $C$ asymptotically for one-dimensional exponential families \cite{cappe2013, korda2013}. Fixed-$\sigma$ UCB does not, its regret is about $\sum_k 2\sigma^2 \log n / \Delta_k$, which can be larger or smaller than $C\log n$ depending on $\sigma$.
+
+All runs of an algorithm are simulated at the same time in numpy (one row per run), which is what makes horizons of $10^6$ possible on a laptop.
